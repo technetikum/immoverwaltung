@@ -1,26 +1,26 @@
 package com.berning.immoverwaltung.models;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Contracts {
-    private LocalDate startDate;
-    private LocalDate startPayment;
+    private Date startDate;
+    private Date startPayment;
     private int cancellationPeriodEndOfMonth;
     private int contractPeriodMonth;
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getStartPayment() {
+    public Date getStartPayment() {
         return startPayment;
     }
 
-    public void setStartPayment(LocalDate startPayment) {
+    public void setStartPayment(Date startPayment) {
         this.startPayment = startPayment;
     }
 

@@ -1,3 +1,5 @@
+
+import com.berning.immoverwaltung.models.Tenants;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,8 +9,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import com.berning.immoverwaltung.view.*;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main extends Application {
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -27,7 +39,6 @@ public class Main extends Application {
         MenuItem menuItemNewFile = new MenuItem("Neu");
         fileMenu.getItems().add(menuItemNewFile);
 
-
         AnchorPane anchorpane = new AnchorPane();
         anchorpane.getChildren().add(btn);
         AnchorPane.setBottomAnchor(btn, 6.0);
@@ -43,6 +54,23 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(anchorpane, 800, 500));
         primaryStage.show();
+
+        // SQLite-TEST
+        String databaseUrl = "jdbc:sqlite:test.db";
+        try {
+            ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl);
+            Dao<Tenants,String> tenantsDao = DaoManager.createDao(connectionSource, Tenants.class);
+            TableUtils.createTable(connectionSource, Tenants.class);
+            Tenants tenants = new Tenants();
+            tenants.setName("Ollek");
+            tenants.setForename("Oschi");
+            tenantsDao.create(tenants);
+            Tenants t2 = tenantsDao.queryForId("Oschi Ollek");
+            System.out.println("Vorname: " + t2.getForename());
+            connectionSource.close();
+            
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 }
-
