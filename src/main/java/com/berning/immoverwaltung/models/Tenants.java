@@ -1,8 +1,17 @@
 package com.berning.immoverwaltung.models;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "accounts")
 public class Tenants {
+
+    @DatabaseField(id = true)
     private String name;
+    
+    @DatabaseField(canBeNull = false)
     private String forename;
+    
     private String street;
     private String streetNumber;
     private int postalCode;
@@ -10,6 +19,10 @@ public class Tenants {
     private String emailAddress;
     private String phoneNumber;
 
+    public Tenants() {
+        //
+    }
+    
     public String getName() {
         return name;
     }
@@ -73,5 +86,5 @@ public class Tenants {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
+
 }

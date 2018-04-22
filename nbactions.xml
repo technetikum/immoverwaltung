@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>run</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>exec:java</goal>
+                
+                
+            </goals>
+            <properties>
+                <exec.args>-classpath %classpath Main</exec.args>
+                <exec.executable>java</exec.executable>
+                <log4j.configurationFile>log4j2.properties</log4j.configurationFile>
+            </properties>
+        </action>
+    </actions>

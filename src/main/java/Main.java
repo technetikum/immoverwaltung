@@ -1,14 +1,13 @@
+
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import com.berning.immoverwaltung.view.*;
 
 public class Main extends Application {
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -27,7 +26,6 @@ public class Main extends Application {
         MenuItem menuItemNewFile = new MenuItem("Neu");
         fileMenu.getItems().add(menuItemNewFile);
 
-
         AnchorPane anchorpane = new AnchorPane();
         anchorpane.getChildren().add(btn);
         AnchorPane.setBottomAnchor(btn, 6.0);
@@ -43,6 +41,7 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(anchorpane, 800, 500));
         primaryStage.show();
+
+
     }
 }
-
