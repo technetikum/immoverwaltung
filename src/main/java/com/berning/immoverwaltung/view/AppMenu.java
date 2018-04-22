@@ -1,9 +1,14 @@
 package com.berning.immoverwaltung.view;
 
+import com.berning.immoverwaltung.control.Database;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.Event;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -52,10 +57,12 @@ public class AppMenu extends MenuBar {
         try {
             // Used getDeclaredMethod instead of getMethod because the first one can access  private methods!
             final Method eventMethod = this.getClass().getDeclaredMethod(methodName, Event.class);
-            menuItem.setOnAction(event -> {
+            menuItem.setOnAction((event) -> {
                 try {
                     eventMethod.invoke(this, event);
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                    System.out.println("Cause: " + ex.getCause());
+                    System.out.println(ex.getLocalizedMessage());
                     ex.printStackTrace();
                 }
             });
@@ -106,7 +113,12 @@ public class AppMenu extends MenuBar {
     }
 
     private void menuItemNeuedatenbank(Event e) {
-        System.out.println("Soll ich jetzt die neue Datenbank erstellen?");
+        System.out.println(e.toString());
+        try {
+            Database db = new Database();
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(AppMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void menuItemDatenbankladen(Event e) {
