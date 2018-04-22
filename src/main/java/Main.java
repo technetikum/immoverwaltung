@@ -1,12 +1,9 @@
 
 import com.berning.immoverwaltung.models.Tenants;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import com.berning.immoverwaltung.view.*;
 import com.j256.ormlite.dao.Dao;
