@@ -1,11 +1,9 @@
 package com.berning.immoverwaltung.view;
 
-import com.sun.media.jfxmedia.logging.Logger;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
-import java.util.logging.Level;
 import javafx.event.Event;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -51,7 +49,6 @@ public class AppMenu extends MenuBar {
         MenuItem menuItem = new MenuItem(name);
         menu.getItems().add(menuItem);
         String methodName = makeMethodNameFromMenuItem(name);
-        System.out.println("Event-Methode: " + methodName);
         try {
             // Used getDeclaredMethod instead of getMethod because the first one can access  private methods!
             final Method eventMethod = this.getClass().getDeclaredMethod(methodName, Event.class);
@@ -59,15 +56,14 @@ public class AppMenu extends MenuBar {
                 try {
                     eventMethod.invoke(this, event);
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    java.util.logging.Logger.getLogger(AppMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             });
         } catch (NoSuchMethodException ex) {
-            java.util.logging.Logger.getLogger(AppMenu.class.getName()).log(Level.WARNING,
-                    "ERROR: There is something wrong with determining the method");
-            java.util.logging.Logger.getLogger(AppMenu.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("There is something wrong with determining the method. Using a default method.");
+            ex.printStackTrace();
         } catch (SecurityException ex) {
-            java.util.logging.Logger.getLogger(AppMenu.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }
@@ -109,7 +105,7 @@ public class AppMenu extends MenuBar {
                 + result.substring(1).toLowerCase();
     }
 
-    private void menuItemNeueDatenbank(Event e) {
+    private void menuItemNeuedatenbank(Event e) {
         System.out.println("Soll ich jetzt die neue Datenbank erstellen?");
     }
 

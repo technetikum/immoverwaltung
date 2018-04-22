@@ -13,6 +13,7 @@
             <properties>
                 <exec.args>-classpath %classpath Main</exec.args>
                 <exec.executable>java</exec.executable>
+                <log4j.configurationFile>log4j2.properties</log4j.configurationFile>
             </properties>
         </action>
     </actions>
